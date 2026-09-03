@@ -1,0 +1,14 @@
+{
+  "name": "noxium-protocol",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Static site for noxium.cash",
+  "license": "MIT",
+  "scripts": {
+    "build": "node tools/build.js",
+    "assets": "node tools/strip-image-meta.js",
+    "gate": "node tools/gate.js",
+    "check": "npm run build && npm run gate"
+  }
+}

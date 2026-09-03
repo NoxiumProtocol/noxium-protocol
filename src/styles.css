@@ -1,0 +1,373 @@
+/* Colour custom properties are emitted by the build from the wavelengths in
+   config. Nothing in this file states a colour value of its own. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--nx-ground);
+  color: var(--nx-body);
+  font-family:
+    system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  /* No web font is requested anywhere. A weight that has no face cannot be
+     synthesised if no face was ever promised. */
+}
+
+.mono,
+.addr__slot,
+.row__nm {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: 12px 16px;
+  background: var(--nx-raise);
+  color: var(--nx-ink);
+}
+
+.skip:focus {
+  left: 0;
+  z-index: 10;
+}
+
+:focus-visible {
+  outline: 2px solid var(--nx-ink);
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------------------------
+   Masthead. The height here is a budget, not a result.
+
+   14 top + 44 bar + 14 gap + 44 band + 16 bottom = 132px, and the row that
+   holds the two buttons is fixed at 44 and never wraps. Both buttons are
+   therefore inside the first screen at every size the site is measured at,
+   including 654px of usable height, and turning an absent channel into a live
+   one changes appearance without changing any dimension.
+   ------------------------------------------------------------------ */
+
+.mast {
+  padding: 14px var(--gut, 20px) 16px;
+  border-bottom: 1px solid var(--nx-line);
+}
+
+.mast__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 44px;
+  flex-wrap: nowrap;
+}
+
+.mast__mark {
+  display: block;
+  min-width: 0;
+  line-height: 0;
+}
+
+.mast__mark img {
+  display: block;
+  width: clamp(132px, 34vw, 220px);
+  height: auto;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+}
+
+/* The 44 by 44 box comes from the svg's own width, height and viewBox. These
+   rules must not be the thing that creates the target: they only stop a
+   layout context from compressing it.
+
+   The outer box is 46 rather than 44 on purpose. Under border-box the 1px
+   border eats into the content area, and at 44 the glyph was measured
+   rendering at 42 wide while its own attributes still said 44. The border
+   sits outside the 44, so the painted target and the declared one agree. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  min-height: 46px;
+  flex: 0 0 46px;
+  border: 1px solid var(--nx-mute);
+  border-radius: 2px;
+  color: var(--nx-ink);
+  text-decoration: none;
+  background: none;
+}
+
+.btn__glyph {
+  display: block;
+  width: 44px;
+  height: 44px;
+}
+
+.btn:hover {
+  border-color: var(--nx-ink);
+}
+
+.btn.is-absent {
+  border-style: dashed;
+  color: var(--nx-body);
+  cursor: not-allowed;
+}
+
+/* ------------------------------------------------------------------
+   The spectrum band. One mark per property, placed at its true wavelength on
+   a 380 to 700 nanometre axis. Lit means a value exists in config. There is no
+   authoring path that lights a line whose value is null.
+   ------------------------------------------------------------------ */
+
+.band {
+  position: relative;
+  height: 44px;
+  margin-top: 14px;
+}
+
+.band__rule {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--nx-line-2);
+}
+
+.band__ln {
+  position: absolute;
+  top: 50%;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--ln);
+  transform: translateY(-50%);
+}
+
+.band__ln.is-lit {
+  height: 34px;
+  box-shadow: 0 0 10px 0 var(--ln);
+}
+
+.band__ln.is-dark {
+  height: 11px;
+  opacity: 0.42;
+}
+
+/* ------------------------------------------------------------------
+   Body
+   ------------------------------------------------------------------ */
+
+main {
+  padding: 0 var(--gut, 20px);
+  max-width: 940px;
+}
+
+section {
+  padding: 34px 0;
+  border-bottom: 1px solid var(--nx-line);
+}
+
+section:last-child {
+  border-bottom: 0;
+}
+
+.h1 {
+  margin: 0 0 14px;
+  color: var(--nx-ink);
+  font-size: clamp(1.55rem, 5.2vw, 2.4rem);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+}
+
+.h2 {
+  margin: 0 0 16px;
+  color: var(--nx-ink);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.lede {
+  margin: 0;
+  max-width: 62ch;
+}
+
+.say {
+  margin: 16px 0 0;
+  color: var(--nx-body);
+  font-size: 1.05rem;
+}
+
+.say.is-absent {
+  font-size: 0.95rem;
+}
+
+/* Address slot */
+
+.addr__slot {
+  margin: 0;
+  color: var(--nx-ink);
+  font-size: clamp(0.72rem, 3.1vw, 0.95rem);
+  letter-spacing: 0.02em;
+  overflow-wrap: anywhere;
+}
+
+.addr.is-absent .addr__slot {
+  color: var(--nx-body);
+  letter-spacing: 0.12em;
+}
+
+.addr__note {
+  margin: 12px 0 0;
+  max-width: 58ch;
+  font-size: 0.95rem;
+}
+
+.addr__copy {
+  margin-top: 14px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--nx-mute);
+  border-radius: 2px;
+  background: none;
+  color: var(--nx-ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.addr__copy:hover {
+  border-color: var(--nx-ink);
+}
+
+/* Readout */
+
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  grid-template-areas:
+    "dot key"
+    ".   nm"
+    ".   val"
+    ".   state";
+  gap: 3px 12px;
+  padding: 16px 0;
+  border-top: 1px solid var(--nx-line);
+}
+
+.row__dot {
+  grid-area: dot;
+  width: 8px;
+  height: 8px;
+  margin-top: 7px;
+  border-radius: 50%;
+  background: var(--ln);
+}
+
+.row.is-dark .row__dot {
+  opacity: 0.34;
+}
+
+.row__k {
+  grid-area: key;
+  color: var(--nx-ink);
+}
+
+.row__nm {
+  grid-area: nm;
+  color: var(--nx-body);
+  font-size: 0.8rem;
+}
+
+.row__em {
+  color: var(--nx-body);
+}
+
+.row__val {
+  grid-area: val;
+  overflow-wrap: anywhere;
+}
+
+.row__val.is-absent {
+  color: var(--nx-body);
+}
+
+a.row__val {
+  color: var(--ln);
+}
+
+.row__state {
+  grid-area: state;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--nx-body);
+}
+
+.foot {
+  padding: 26px var(--gut, 20px) 44px;
+  border-top: 1px solid var(--nx-line);
+  color: var(--nx-body);
+  font-size: 0.85rem;
+}
+
+.foot p {
+  margin: 0 0 6px;
+  max-width: 62ch;
+}
+
+@media (min-width: 720px) {
+  :root {
+    --gut: 40px;
+  }
+
+  .row {
+    grid-template-columns: 10px minmax(0, 15rem) minmax(0, 12rem) minmax(0, 1fr) auto;
+    grid-template-areas: "dot key nm val state";
+    align-items: baseline;
+    gap: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

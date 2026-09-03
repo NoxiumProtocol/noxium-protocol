@@ -1,0 +1,78 @@
+{
+  "identity": {
+    "wordmark": "noxium.",
+    "domain": "noxium.cash",
+    "tagline": null,
+    "taglineReason": "positioning line not supplied"
+  },
+  "buttons": ["x", "github"],
+  "spectrum": {
+    "axis": {
+      "from": 380,
+      "to": 700
+    },
+    "lines": [
+      {
+        "key": "contract",
+        "label": "Contract address",
+        "nm": 630.0,
+        "emitter": "O I red",
+        "value": null,
+        "reason": "no address published"
+      },
+      {
+        "key": "venue",
+        "label": "Venue",
+        "nm": 391.4,
+        "emitter": "N2+ 1NG (0,0)",
+        "value": null,
+        "reason": "no venue announced"
+      },
+      {
+        "key": "chain",
+        "label": "Settlement layer",
+        "nm": 427.8,
+        "emitter": "N2+ 1NG (0,1)",
+        "value": null,
+        "reason": "not specified by the project"
+      },
+      {
+        "key": "github",
+        "label": "Source",
+        "nm": 486.1,
+        "emitter": "H-beta",
+        "value": "https://github.com/NoxiumProtocol/noxium-protocol",
+        "reason": null
+      },
+      {
+        "key": "x",
+        "label": "Announcements",
+        "nm": 557.7,
+        "emitter": "O I auroral green",
+        "value": "https://x.com/NoxiumProtocol",
+        "reason": null
+      },
+      {
+        "key": "token",
+        "label": "Token",
+        "nm": 589.0,
+        "emitter": "Na D sodium airglow",
+        "value": null,
+        "reason": "no token has been published"
+      },
+      {
+        "key": "mechanism",
+        "label": "Mechanism",
+        "nm": 656.3,
+        "emitter": "H-alpha",
+        "value": null,
+        "reason": "not described by the project"
+      }
+    ]
+  },
+  "deliberatelyEmpty": [
+    "identity.taglineReason",
+    "spectrum.axis.from",
+    "spectrum.axis.to"
+  ]
+}
